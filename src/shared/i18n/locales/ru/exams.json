@@ -1,0 +1,26 @@
+{
+  "exams": {
+    "title": "Экзамены",
+    "pageDescription": "Просматривайте, ищите и обновляйте результаты экзаменов.",
+    "createTitle": "Новый экзамен",
+    "editTitle": "Редактировать экзамен",
+    "fields": {
+      "course": "Предмет",
+      "coursePlaceholder": "Выберите предмет",
+      "student": "Учащийся",
+      "studentPlaceholder": "Выберите учащегося",
+      "examDate": "Дата экзамена",
+      "score": "Оценка",
+      "scorePlaceholder": "0-9"
+    },
+    "validation": {
+      "required": "Обязательное поле",
+      "scoreRange": "Оценка должна быть от 0 до 9"
+    },
+    "table": {
+      "searchPlaceholder": "Поиск экзаменов...",
+      "empty": "Экзамены не найдены"
+    },
+    "deleteConfirm": "Вы уверены, что хотите удалить экзамен «{{course}}» для {{student}}?"
+  }
+}

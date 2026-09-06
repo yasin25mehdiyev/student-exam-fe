@@ -1,0 +1,26 @@
+{
+  "exams": {
+    "title": "Exams",
+    "pageDescription": "View, search, and update exam results and scores.",
+    "createTitle": "New exam",
+    "editTitle": "Edit exam",
+    "fields": {
+      "course": "Course",
+      "coursePlaceholder": "Select a course",
+      "student": "Student",
+      "studentPlaceholder": "Select a student",
+      "examDate": "Exam date",
+      "score": "Score",
+      "scorePlaceholder": "0-9"
+    },
+    "validation": {
+      "required": "This field is required",
+      "scoreRange": "Score must be between 0 and 9"
+    },
+    "table": {
+      "searchPlaceholder": "Search exams...",
+      "empty": "No exams found"
+    },
+    "deleteConfirm": "Are you sure you want to delete the {{course}} exam for {{student}}?"
+  }
+}

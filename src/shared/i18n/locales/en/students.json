@@ -1,0 +1,28 @@
+{
+  "students": {
+    "title": "Students",
+    "pageDescription": "View, search, and update your student roster.",
+    "createTitle": "New student",
+    "editTitle": "Edit student",
+    "fields": {
+      "number": "Number",
+      "numberPlaceholder": "e.g. 1024",
+      "firstName": "First name",
+      "firstNamePlaceholder": "e.g. Kamran",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "e.g. Mammadov",
+      "classLevel": "Class",
+      "classLevelPlaceholder": "1-11"
+    },
+    "validation": {
+      "required": "This field is required",
+      "numberRange": "Number must be between 1 and 99999",
+      "classLevelRange": "Class must be between 1 and 11"
+    },
+    "table": {
+      "searchPlaceholder": "Search students...",
+      "empty": "No students found"
+    },
+    "deleteConfirm": "Are you sure you want to delete \"{{name}}\"?"
+  }
+}

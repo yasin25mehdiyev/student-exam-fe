@@ -1,0 +1,17 @@
+{
+  "dashboard": {
+    "pageDescription": "Məktəbinizin ümumi statistikasına və sinif ortalamalarına baxın.",
+    "stats": {
+      "courses": "Dərslər",
+      "students": "Şagirdlər",
+      "exams": "İmtahanlar"
+    },
+    "classAverages": "Sinif üzrə ortalama",
+    "columns": {
+      "classLevel": "Sinif",
+      "average": "Ortalama qiymət",
+      "examCount": "İmtahan sayı"
+    },
+    "empty": "Hələ heç bir imtahan qeydə alınmayıb"
+  }
+}

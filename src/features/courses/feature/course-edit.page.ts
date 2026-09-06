@@ -1,0 +1,50 @@
+import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
+import { PageHeader } from '../../../shared/ui/custom/page-header';
+import { CourseDataAccess } from '../data-access/course.service';
+import { CourseForm, CourseFormValue } from '../ui/course-form';
+
+@Component({
+  selector: 'app-course-edit-page',
+  imports: [CourseForm, TranslatePipe, PageHeader],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <app-page-header [title]="'courses.editTitle' | translate" />
+    @if (courseResource.hasValue()) {
+      <app-course-form
+        mode="edit"
+        [initialValue]="courseResource.value()"
+        [saving]="saving()"
+        (save)="onSave($event)"
+      />
+    }
+  `,
+})
+export class CourseEditPage {
+  readonly code = input.required<string>();
+
+  private readonly data = inject(CourseDataAccess);
+  private readonly router = inject(Router);
+
+  protected readonly courseResource = this.data.courseByCode(this.code);
+  protected readonly saving = signal(false);
+
+  constructor() {
+    // A bad/deleted code makes the lookup 404 - route to the not-found page instead of leaving
+    // this page rendering just the header with an empty body underneath.
+    effect(() => {
+      if (this.courseResource.error()) {
+        this.router.navigateByUrl('/not-found');
+      }
+    });
+  }
+
+  protected onSave(value: CourseFormValue): void {
+    this.saving.set(true);
+    this.data.updateCourse(this.code(), value).subscribe({
+      next: () => this.router.navigate(['/courses']),
+      error: () => this.saving.set(false),
+    });
+  }
+}

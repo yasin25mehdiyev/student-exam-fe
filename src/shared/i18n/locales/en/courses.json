@@ -1,0 +1,31 @@
+{
+  "courses": {
+    "title": "Courses",
+    "pageDescription": "View, search, and update your course list.",
+    "createTitle": "New course",
+    "editTitle": "Edit course",
+    "fields": {
+      "code": "Code",
+      "codePlaceholder": "e.g. 10A",
+      "name": "Name",
+      "namePlaceholder": "e.g. Mathematics",
+      "classLevel": "Class",
+      "classLevelPlaceholder": "1-11",
+      "teacherFirstName": "Teacher first name",
+      "teacherFirstNamePlaceholder": "e.g. Aynur",
+      "teacherLastName": "Teacher last name",
+      "teacherLastNamePlaceholder": "e.g. Aliyeva"
+    },
+    "validation": {
+      "required": "This field is required",
+      "codeLength": "Code must be exactly 3 characters",
+      "maxLength": "Maximum {{max}} characters",
+      "classLevelRange": "Class must be between 1 and 11"
+    },
+    "table": {
+      "searchPlaceholder": "Search courses...",
+      "empty": "No courses found"
+    },
+    "deleteConfirm": "Are you sure you want to delete \"{{name}}\"?"
+  }
+}

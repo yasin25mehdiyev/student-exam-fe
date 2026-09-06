@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "dashboard": "Панель управления",
+    "courses": "Предметы",
+    "students": "Учащиеся",
+    "exams": "Экзамены",
+    "reports": "Отчёты",
+    "language": "Язык",
+    "sidebar": {
+      "support": "Техническая поддержка",
+      "phone": "+994 50 123 45 67",
+      "email": "dastek@numune.az",
+      "collapse": "Свернуть меню",
+      "expand": "Развернуть меню",
+      "openMenu": "Открыть меню",
+      "closeMenu": "Закрыть меню"
+    }
+  }
+}

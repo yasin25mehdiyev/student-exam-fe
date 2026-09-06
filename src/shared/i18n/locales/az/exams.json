@@ -1,0 +1,26 @@
+{
+  "exams": {
+    "title": "İmtahanlar",
+    "pageDescription": "İmtahan nəticələrini görüntüləyin, axtarın və qiymətləri yeniləyin.",
+    "createTitle": "Yeni imtahan",
+    "editTitle": "İmtahanı redaktə et",
+    "fields": {
+      "course": "Dərs",
+      "coursePlaceholder": "Dərs seçin",
+      "student": "Şagird",
+      "studentPlaceholder": "Şagird seçin",
+      "examDate": "İmtahan tarixi",
+      "score": "Qiymət",
+      "scorePlaceholder": "0-9 arası"
+    },
+    "validation": {
+      "required": "Bu xana mütləqdir",
+      "scoreRange": "Qiymət 0 ilə 9 arasında olmalıdır"
+    },
+    "table": {
+      "searchPlaceholder": "İmtahan axtar...",
+      "empty": "Heç bir imtahan tapılmadı"
+    },
+    "deleteConfirm": "{{student}} üçün {{course}} imtahanını silmək istədiyinizə əminsiniz?"
+  }
+}

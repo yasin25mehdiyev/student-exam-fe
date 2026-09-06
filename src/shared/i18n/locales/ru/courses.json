@@ -1,0 +1,31 @@
+{
+  "courses": {
+    "title": "Предметы",
+    "pageDescription": "Просматривайте, ищите и обновляйте список предметов.",
+    "createTitle": "Новый предмет",
+    "editTitle": "Редактировать предмет",
+    "fields": {
+      "code": "Код",
+      "codePlaceholder": "напр. 10A",
+      "name": "Название",
+      "namePlaceholder": "напр. Математика",
+      "classLevel": "Класс",
+      "classLevelPlaceholder": "1-11",
+      "teacherFirstName": "Имя учителя",
+      "teacherFirstNamePlaceholder": "напр. Айнур",
+      "teacherLastName": "Фамилия учителя",
+      "teacherLastNamePlaceholder": "напр. Алиева"
+    },
+    "validation": {
+      "required": "Обязательное поле",
+      "codeLength": "Код должен содержать ровно 3 символа",
+      "maxLength": "Максимум {{max}} символов",
+      "classLevelRange": "Класс должен быть от 1 до 11"
+    },
+    "table": {
+      "searchPlaceholder": "Поиск предметов...",
+      "empty": "Предметы не найдены"
+    },
+    "deleteConfirm": "Вы уверены, что хотите удалить «{{name}}»?"
+  }
+}

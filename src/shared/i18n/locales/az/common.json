@@ -1,0 +1,48 @@
+{
+  "common": {
+    "appName": "Tədris İmtahan Sistemi",
+    "actions": {
+      "save": "Yadda saxla",
+      "cancel": "İmtina et",
+      "create": "Yarat",
+      "new": "Yeni",
+      "edit": "Redaktə et",
+      "delete": "Sil",
+      "search": "Axtar",
+      "retry": "Yenidən cəhd et",
+      "back": "Geri",
+      "confirm": "Təsdiqlə",
+      "close": "Bağla"
+    },
+    "state": {
+      "loading": "Yüklənir...",
+      "empty": "Nəticə tapılmadı",
+      "error": "Məlumatları yükləmək mümkün olmadı"
+    },
+    "table": {
+      "page": "Səhifə {{current}} / {{total}}",
+      "rowsPerPage": "Sətir sayı",
+      "totalItems": "Cəmi {{count}} nəticə"
+    },
+    "confirmDelete": {
+      "title": "Silinməni təsdiqləyin",
+      "message": "Bu əməliyyat geri qaytarıla bilməz."
+    },
+    "toast": {
+      "created": "Uğurla yaradıldı",
+      "updated": "Uğurla yeniləndi",
+      "deleted": "Uğurla silindi"
+    },
+    "notFound": {
+      "title": "Səhifə tapılmadı",
+      "description": "Axtardığınız səhifə köçürülüb, adı dəyişdirilib və ya heç vaxt mövcud olmayıb.",
+      "home": "Ana səhifəyə qayıt",
+      "browse": "Şagirdlərə keç"
+    },
+    "error": {
+      "title": "Nəsə səhv getdi",
+      "description": "Gözlənilməz bir xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.",
+      "home": "Ana səhifəyə qayıt"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "dashboard": "İdarə paneli",
+    "courses": "Dərslər",
+    "students": "Şagirdlər",
+    "exams": "İmtahanlar",
+    "reports": "Hesabatlar",
+    "language": "Dil",
+    "sidebar": {
+      "support": "Texniki dəstək",
+      "phone": "+994 50 123 45 67",
+      "email": "dastek@numune.az",
+      "collapse": "Menyunu yığ",
+      "expand": "Menyunu aç",
+      "openMenu": "Menyunu aç",
+      "closeMenu": "Menyunu bağla"
+    }
+  }
+}

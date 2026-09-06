@@ -1,0 +1,31 @@
+{
+  "courses": {
+    "title": "Dərslər",
+    "pageDescription": "Dərs siyahısını görüntüləyin, axtarın və məlumatlarını yeniləyin.",
+    "createTitle": "Yeni dərs",
+    "editTitle": "Dərsi redaktə et",
+    "fields": {
+      "code": "Kod",
+      "codePlaceholder": "Məs: 10A",
+      "name": "Ad",
+      "namePlaceholder": "Məs: Riyaziyyat",
+      "classLevel": "Sinif",
+      "classLevelPlaceholder": "1-11 arası",
+      "teacherFirstName": "Müəllimin adı",
+      "teacherFirstNamePlaceholder": "Məs: Aynur",
+      "teacherLastName": "Müəllimin soyadı",
+      "teacherLastNamePlaceholder": "Məs: Əliyeva"
+    },
+    "validation": {
+      "required": "Bu xana mütləqdir",
+      "codeLength": "Kod tam 3 simvol olmalıdır",
+      "maxLength": "Maksimum {{max}} simvol",
+      "classLevelRange": "Sinif 1 ilə 11 arasında olmalıdır"
+    },
+    "table": {
+      "searchPlaceholder": "Dərs axtar...",
+      "empty": "Heç bir dərs tapılmadı"
+    },
+    "deleteConfirm": "\"{{name}}\" dərsini silmək istədiyinizə əminsiniz?"
+  }
+}
