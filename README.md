@@ -1,4 +1,4 @@
-# Tədris İmtahan Sistemi — Frontend
+# Student Exam Management System — Frontend
 
 Angular frontend for [`student-exam-be`](../student-exam-be), a school exam-management
 API (courses, students, exams, reports). Built as a technical assignment — **there is
