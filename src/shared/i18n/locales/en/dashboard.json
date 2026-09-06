@@ -1,0 +1,17 @@
+{
+  "dashboard": {
+    "pageDescription": "View your school's overall statistics and class averages.",
+    "stats": {
+      "courses": "Courses",
+      "students": "Students",
+      "exams": "Exams"
+    },
+    "classAverages": "Class averages",
+    "columns": {
+      "classLevel": "Class",
+      "average": "Average score",
+      "examCount": "Exam count"
+    },
+    "empty": "No exams recorded yet"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "students": {
+    "title": "Şagirdlər",
+    "pageDescription": "Şagird siyahısını görüntüləyin, axtarın və məlumatlarını yeniləyin.",
+    "createTitle": "Yeni şagird",
+    "editTitle": "Şagirdi redaktə et",
+    "fields": {
+      "number": "Nömrə",
+      "numberPlaceholder": "Məs: 1024",
+      "firstName": "Adı",
+      "firstNamePlaceholder": "Məs: Kamran",
+      "lastName": "Soyadı",
+      "lastNamePlaceholder": "Məs: Məmmədov",
+      "classLevel": "Sinif",
+      "classLevelPlaceholder": "1-11 arası"
+    },
+    "validation": {
+      "required": "Bu xana mütləqdir",
+      "numberRange": "Nömrə 1 ilə 99999 arasında olmalıdır",
+      "classLevelRange": "Sinif 1 ilə 11 arasında olmalıdır"
+    },
+    "table": {
+      "searchPlaceholder": "Şagird axtar...",
+      "empty": "Heç bir şagird tapılmadı"
+    },
+    "deleteConfirm": "\"{{name}}\" şagirdini silmək istədiyinizə əminsiniz?"
+  }
+}

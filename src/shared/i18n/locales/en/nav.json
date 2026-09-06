@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "courses": "Courses",
+    "students": "Students",
+    "exams": "Exams",
+    "reports": "Reports",
+    "language": "Language",
+    "sidebar": {
+      "support": "Technical support",
+      "phone": "+994 50 123 45 67",
+      "email": "dastek@numune.az",
+      "collapse": "Collapse menu",
+      "expand": "Expand menu",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    }
+  }
+}

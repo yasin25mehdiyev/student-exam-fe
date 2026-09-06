@@ -1,0 +1,35 @@
+{
+  "reports": {
+    "title": "Hesabatlar",
+    "pageDescription": "Şagird və sinif üzrə performans hesabatlarına baxın.",
+    "tabs": {
+      "studentReport": "Şagird hesabatı",
+      "classAverages": "Sinif üzrə ortalama"
+    },
+    "studentReport": {
+      "searchLabel": "Şagird nömrəsi",
+      "searchPlaceholder": "Nömrəni daxil edin",
+      "search": "Axtar",
+      "notFound": "Bu nömrə ilə şagird tapılmadı",
+      "prompt": "Nəticələrə baxmaq üçün şagird nömrəsi daxil edib axtarın.",
+      "average": "Ortalama qiymət",
+      "examCount": "İmtahan sayı",
+      "columns": {
+        "course": "Dərs",
+        "date": "Tarix",
+        "score": "Qiymət"
+      },
+      "empty": "Bu şagirdin heç bir imtahanı yoxdur"
+    },
+    "classAverages": {
+      "filterLabel": "Dərsə görə filtr",
+      "allCourses": "Bütün dərslər",
+      "columns": {
+        "classLevel": "Sinif",
+        "average": "Ortalama qiymət",
+        "examCount": "İmtahan sayı"
+      },
+      "empty": "Məlumat tapılmadı"
+    }
+  }
+}

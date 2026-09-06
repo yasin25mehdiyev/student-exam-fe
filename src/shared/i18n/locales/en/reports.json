@@ -1,0 +1,35 @@
+{
+  "reports": {
+    "title": "Reports",
+    "pageDescription": "View student and class-level performance reports.",
+    "tabs": {
+      "studentReport": "Student report",
+      "classAverages": "Class averages"
+    },
+    "studentReport": {
+      "searchLabel": "Student number",
+      "searchPlaceholder": "Enter a number",
+      "search": "Search",
+      "notFound": "No student found with this number",
+      "prompt": "Enter a student number above and search to see results.",
+      "average": "Average score",
+      "examCount": "Exam count",
+      "columns": {
+        "course": "Course",
+        "date": "Date",
+        "score": "Score"
+      },
+      "empty": "This student has no exams"
+    },
+    "classAverages": {
+      "filterLabel": "Filter by course",
+      "allCourses": "All courses",
+      "columns": {
+        "classLevel": "Class",
+        "average": "Average score",
+        "examCount": "Exam count"
+      },
+      "empty": "No data found"
+    }
+  }
+}

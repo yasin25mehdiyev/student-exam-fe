@@ -1,0 +1,48 @@
+{
+  "common": {
+    "appName": "Student Exam System",
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "create": "Create",
+      "new": "New",
+      "edit": "Edit",
+      "delete": "Delete",
+      "search": "Search",
+      "retry": "Retry",
+      "back": "Back",
+      "confirm": "Confirm",
+      "close": "Close"
+    },
+    "state": {
+      "loading": "Loading...",
+      "empty": "No results found",
+      "error": "Failed to load data"
+    },
+    "table": {
+      "page": "Page {{current}} of {{total}}",
+      "rowsPerPage": "Rows per page",
+      "totalItems": "{{count}} results total"
+    },
+    "confirmDelete": {
+      "title": "Confirm deletion",
+      "message": "This action cannot be undone."
+    },
+    "toast": {
+      "created": "Created successfully",
+      "updated": "Updated successfully",
+      "deleted": "Deleted successfully"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you're looking for may have been moved, renamed, or never existed.",
+      "home": "Go to home",
+      "browse": "Go to students"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "An unexpected error occurred. Please try again.",
+      "home": "Go to home"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "students": {
+    "title": "Учащиеся",
+    "pageDescription": "Просматривайте, ищите и обновляйте список учащихся.",
+    "createTitle": "Новый учащийся",
+    "editTitle": "Редактировать учащегося",
+    "fields": {
+      "number": "Номер",
+      "numberPlaceholder": "напр. 1024",
+      "firstName": "Имя",
+      "firstNamePlaceholder": "напр. Камран",
+      "lastName": "Фамилия",
+      "lastNamePlaceholder": "напр. Мамедов",
+      "classLevel": "Класс",
+      "classLevelPlaceholder": "1-11"
+    },
+    "validation": {
+      "required": "Обязательное поле",
+      "numberRange": "Номер должен быть от 1 до 99999",
+      "classLevelRange": "Класс должен быть от 1 до 11"
+    },
+    "table": {
+      "searchPlaceholder": "Поиск учащихся...",
+      "empty": "Учащиеся не найдены"
+    },
+    "deleteConfirm": "Вы уверены, что хотите удалить «{{name}}»?"
+  }
+}

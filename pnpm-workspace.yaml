@@ -1,0 +1,8 @@
+packages:
+  - '.'
+
+allowBuilds:
+  nx: true
+
+overrides:
+  '@scalar/openapi-parser': '0.28.14'

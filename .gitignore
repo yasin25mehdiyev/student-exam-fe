@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Angular build output
+dist/
+.angular/
+
+# Test coverage
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Editor / OS
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
