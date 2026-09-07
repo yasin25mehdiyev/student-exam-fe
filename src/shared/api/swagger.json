@@ -1029,11 +1029,10 @@
       },
       "SortDirection": {
         "enum": [
-          0,
-          1
+          "Asc",
+          "Desc"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "StudentDto": {
         "type": "object",
