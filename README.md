@@ -1,8 +1,10 @@
 # Student Exam Management System — Frontend
 
-Angular frontend for [`student-exam-be`](../student-exam-be), a school exam-management
-API (courses, students, exams, reports). Built as a technical assignment — **there is
-no authentication**; every route is open.
+**[Live Demo →](https://student-exam-fe.onrender.com)**
+
+Angular frontend for [`student-exam-be`](https://github.com/yasin25mehdiyev/student-exam-be),
+a school exam-management API (courses, students, exams, reports). Built as a technical
+assignment — **there is no authentication**; every route is open.
 
 ## Tech Stack
 
@@ -65,7 +67,7 @@ never injects a `data-access` service directly — it only receives data through
 - A reachable backend. `src/environments/environment.development.ts` points at the
   deployed API (`https://student-exam-api.azurewebsites.net`) by default, so `pnpm dev`
   works out of the box with no backend setup. To run against a local backend instead —
-  see [`../student-exam-be/README.md`](../student-exam-be/README.md) — change
+  see [`student-exam-be`](https://github.com/yasin25mehdiyev/student-exam-be) — change
   `apiBaseUrl` there to `http://localhost:5140` (its `Program.cs` already has a CORS
   policy open for `http://localhost:4200`).
 
