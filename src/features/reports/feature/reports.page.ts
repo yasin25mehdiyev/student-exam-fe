@@ -24,6 +24,7 @@ import {
   HlmTr,
 } from '@spartan-ng/helm/table';
 import { HlmTabs, HlmTabsContent, HlmTabsList, HlmTabsTrigger } from '@spartan-ng/helm/tabs';
+import { ClassAveragesTable } from '../../../shared/ui/custom/class-averages-table';
 import { ScoreBadge } from '../../../shared/ui/custom/score-badge';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { ReportDataAccess } from '../data-access/report.service';
@@ -57,6 +58,7 @@ import { ReportDataAccess } from '../data-access/report.service';
     HlmTabsTrigger,
     HlmTabsContent,
     ScoreBadge,
+    ClassAveragesTable,
     PageHeader,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -192,46 +194,14 @@ import { ReportDataAccess } from '../data-access/report.service';
             </hlm-select>
           </div>
 
-          <div hlmTableContainer class="overflow-hidden rounded-xl border border-border">
-            <table hlmTable>
-              <thead hlmTHead>
-                <tr hlmTr class="bg-brand-500 hover:bg-brand-500">
-                  <th hlmTh class="text-white">{{
-                    'reports.classAverages.columns.classLevel' | translate
-                  }}</th>
-                  <th hlmTh class="text-white">{{
-                    'reports.classAverages.columns.average' | translate
-                  }}</th>
-                  <th hlmTh class="text-white">{{
-                    'reports.classAverages.columns.examCount' | translate
-                  }}</th>
-                </tr>
-              </thead>
-              <tbody hlmTBody>
-                @if (classAverages.isLoading()) {
-                  @for (row of skeletonRows; track row) {
-                    <tr hlmTr class="bg-white">
-                      <td hlmTd colspan="3"><div hlmSkeleton class="h-6 w-full"></div></td>
-                    </tr>
-                  }
-                } @else if (!classAverages.value()?.length) {
-                  <tr hlmTr class="bg-white">
-                    <td hlmTd colspan="3" class="py-8 text-center text-ink-tertiary">
-                      {{ 'reports.classAverages.empty' | translate }}
-                    </td>
-                  </tr>
-                } @else {
-                  @for (row of classAverages.value()!; track row.classLevel) {
-                    <tr hlmTr class="bg-white">
-                      <td hlmTd>{{ row.classLevel }}</td>
-                      <td hlmTd><app-score-badge [score]="row.averageScore ?? 0" /></td>
-                      <td hlmTd>{{ row.examCount }}</td>
-                    </tr>
-                  }
-                }
-              </tbody>
-            </table>
-          </div>
+          <app-class-averages-table
+            [rows]="classAverages.value() ?? []"
+            [isLoading]="classAverages.isLoading()"
+            classLevelLabelKey="reports.classAverages.columns.classLevel"
+            averageLabelKey="reports.classAverages.columns.average"
+            examCountLabelKey="reports.classAverages.columns.examCount"
+            emptyMessageKey="reports.classAverages.empty"
+          />
         </div>
       </div>
     </hlm-tabs>
@@ -241,7 +211,6 @@ export class ReportsPage {
   private readonly data = inject(ReportDataAccess);
 
   protected readonly activeTab = signal<string>('student');
-  protected readonly skeletonRows = Array.from({ length: 4 }, (_, i) => i);
 
   protected studentNumberInput = '';
   protected readonly studentNumber = signal<number | undefined>(undefined);
