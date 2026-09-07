@@ -92,7 +92,7 @@ export interface DataTableColumn {
       </button>
     </div>
 
-    <div hlmTableContainer class="overflow-hidden rounded-xl border border-border">
+    <div hlmTableContainer class="rounded-xl border border-border">
       <table hlmTable>
         <thead hlmTHead>
           <tr hlmTr class="bg-brand-500 hover:bg-brand-500">
