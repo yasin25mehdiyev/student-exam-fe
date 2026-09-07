@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PageTitleService } from '../core/layout/page-title.service';
 import { RouteProgressBar } from '../shared/ui/custom/route-progress-bar';
-import { LocaleService } from '../shared/i18n/locale.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +13,7 @@ import { LocaleService } from '../shared/i18n/locale.service';
   `,
 })
 export class App {
-  private readonly localeService = inject(LocaleService);
+  // Injected only to force eager instantiation of this root-singleton service - it has no
+  // other consumer, so without this it would never start syncing the tab title.
   private readonly pageTitleService = inject(PageTitleService);
 }
