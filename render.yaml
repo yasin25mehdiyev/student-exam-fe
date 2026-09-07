@@ -2,7 +2,7 @@ services:
   - type: web
     name: student-exam-fe
     runtime: static
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
     staticPublishPath: dist/student-exam-fe/browser
     pullRequestPreviewsEnabled: false
     routes:
