@@ -8,8 +8,8 @@ import {
   withNavigationErrorHandler,
 } from '@angular/router';
 import { routes } from './app.routes';
-import { apiErrorInterceptor } from '../core/http/api-error.interceptor';
-import { apiPrefixInterceptor } from '../core/http/api-prefix.interceptor';
+import { apiErrorInterceptor } from '../core/interceptors/api-error.interceptor';
+import { apiPrefixInterceptor } from '../core/interceptors/api-prefix.interceptor';
 import { provideAppTranslate } from '../shared/i18n/config';
 
 export const appConfig: ApplicationConfig = {
