@@ -9,6 +9,6 @@ export type SortDirection = typeof SortDirection[keyof typeof SortDirection];
 
 
 export const SortDirection = {
-  NUMBER_0: 0,
-  NUMBER_1: 1,
+  Asc: 'Asc',
+  Desc: 'Desc',
 } as const;
