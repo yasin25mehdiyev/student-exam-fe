@@ -15,16 +15,20 @@ interface ValidationProblemDetails {
   readonly errors?: Record<string, string[]>;
 }
 
-export function getApiErrorMessage(
-  error: unknown,
-  fallback = 'Gözlənilməz xəta baş verdi.',
-): string {
+export interface ApiErrorMessages {
+  /** Shown for a non-HTTP error, or when nothing more specific could be extracted. */
+  readonly fallback: string;
+  /** Shown for a network-level failure (status 0) - the request never reached the server. */
+  readonly connectivity: string;
+}
+
+export function getApiErrorMessage(error: unknown, messages: ApiErrorMessages): string {
   if (!(error instanceof HttpErrorResponse)) {
-    return fallback;
+    return messages.fallback;
   }
 
   if (error.status === 0) {
-    return 'Serverə qoşulmaq mümkün olmadı. İnternet bağlantınızı yoxlayın.';
+    return messages.connectivity;
   }
 
   const body: unknown = error.error;
@@ -49,5 +53,5 @@ export function getApiErrorMessage(
     return problem.title;
   }
 
-  return fallback;
+  return messages.fallback;
 }

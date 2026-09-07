@@ -31,7 +31,9 @@
     "toast": {
       "created": "Uğurla yaradıldı",
       "updated": "Uğurla yeniləndi",
-      "deleted": "Uğurla silindi"
+      "deleted": "Uğurla silindi",
+      "unexpectedError": "Gözlənilməz xəta baş verdi.",
+      "connectivityError": "Serverə qoşulmaq mümkün olmadı. İnternet bağlantınızı yoxlayın."
     },
     "notFound": {
       "title": "Səhifə tapılmadı",
