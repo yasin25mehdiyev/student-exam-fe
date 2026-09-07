@@ -11,7 +11,7 @@ no authentication**; every route is open.
 - **Angular Router** — lazy-loaded routes, `withComponentInputBinding()` for typed route params
 - **Reactive Forms** — validators mirrored from the backend's `DataAnnotations` constraints
 - **Tailwind CSS 4** — CSS-variable design tokens (`src/styles.css`), same token shape as shadcn/ui
-- **@spartan-ng** (Brain + Helm) — the Angular-ecosystem equivalent of shadcn/ui: headless Angular CDK primitives with Tailwind-styled components, copied into `src/shared/ui`
+- **@spartan-ng** (Brain + Helm) — the Angular-ecosystem equivalent of shadcn/ui: headless Angular CDK primitives with Tailwind-styled components, copied into `src/shared/ui/primitives`
 - **@ngx-translate** — runtime i18n, az/en/ru, `localStorage`-remembered locale
 - **Orval + Axios-free `HttpClient`** — typed API client generated from the backend's OpenAPI spec
 - **ESLint (angular-eslint), Prettier, Husky, lint-staged, commitlint, commitizen (cz-git)** — code quality and commit hygiene
@@ -32,13 +32,16 @@ a build tool:
 src/
 ├── app/                    # bootstrap: app.config.ts (providers, zoneless, HttpClient + interceptors), app.routes.ts
 ├── core/
-│   └── layout/               # app shell — sidebar, header, breadcrumb, language switcher (singleton chrome, not a reusable slice)
-│   └── http/                  # HTTP interceptors (API origin prefix, error-toast on failed mutations)
+│   ├── layout/                # app shell — sidebar, header, breadcrumb, page title (singleton chrome, not a reusable slice)
+│   ├── interceptors/            # HTTP interceptors (API origin prefix, error-toast on failed mutations)
+│   └── pages/                    # global, feature-agnostic routes (404, unhandled-navigation error page)
 ├── shared/
-│   ├── ui/                   # design system — spartan-ng components (copied in via `ng g @spartan-ng/cli:ui`) + custom (confirm-dialog, score-badge)
-│   ├── i18n/                  # ngx-translate config + az/en/ru JSON, one namespace per feature
-│   ├── lib/                    # generic helpers (API error parsing, sort-direction mapping, paged-list resource factory)
-│   └── api/generated/           # Orval output — not hand-edited
+│   ├── ui/
+│   │   ├── primitives/            # spartan-ng components, copied in via `ng g @spartan-ng/cli:ui` — vendored, not hand-edited
+│   │   └── custom/                 # hand-written, reusable presentational components (DataTable, ClassAveragesTable, confirm-dialog, score-badge, language-switcher, ...)
+│   ├── i18n/                        # ngx-translate config + az/en/ru JSON, one namespace per feature
+│   ├── lib/                          # generic helpers (API error parsing, sort-direction mapping, paged-list resource factory, route paths/breadcrumb, mutation-toast notifier)
+│   └── api/generated/                 # Orval output — not hand-edited
 └── features/
     ├── dashboard/
     ├── courses/
@@ -59,7 +62,12 @@ never injects a `data-access` service directly — it only receives data through
 
 - **Node.js 20+**
 - **pnpm** (this repo uses `pnpm-lock.yaml`)
-- The backend running locally — see [`../student-exam-be/README.md`](../student-exam-be/README.md). It must be reachable at the URL configured in `src/environments/environment.development.ts` (default `http://localhost:5140`), and its Program.cs already has a CORS policy open for `http://localhost:4200`.
+- A reachable backend. `src/environments/environment.development.ts` points at the
+  deployed API (`https://student-exam-api.azurewebsites.net`) by default, so `pnpm dev`
+  works out of the box with no backend setup. To run against a local backend instead —
+  see [`../student-exam-be/README.md`](../student-exam-be/README.md) — change
+  `apiBaseUrl` there to `http://localhost:5140` (its `Program.cs` already has a CORS
+  policy open for `http://localhost:4200`).
 
 ## Getting Started
 
@@ -95,14 +103,16 @@ builds via `angular.json`'s `fileReplacements`).
 whenever the backend's contract changes:
 
 ```bash
-pnpm generate:api   # backend must be running at API_URL (default http://localhost:5140)
+pnpm generate:api   # fetches from API_URL (default http://localhost:5140) - override for a
+                    # non-local backend, e.g. API_URL=https://student-exam-api.azurewebsites.net
 ```
 
 Each feature's `data-access/*.service.ts` wraps the relevant generated service with
 `rxResource` for reads (list + detail, exposed as signals) and plain methods for
-mutations, which reload the list resource and show a toast on success. Failed
-mutations are caught once, centrally, in `core/http/api-error.interceptor.ts` —
-individual features don't repeat try/catch-and-toast.
+mutations, which reload the list resource and show a toast on success via
+`shared/lib/mutation-toast.ts`'s shared notifier. Failed mutations are caught once,
+centrally, in `core/interceptors/api-error.interceptor.ts` — individual features don't
+repeat try/catch-and-toast.
 
 ## Design Tokens
 
@@ -111,9 +121,12 @@ shadcn/ui-based apps: `--background`/`--foreground`/`--primary`/`--card`/`--bord
 etc., mapped into Tailwind's `color-*` namespace via `@theme inline` (spartan-ng's
 Tailwind preset does the base mapping; this app adds its own brand scale
 (`--brand-100/400/500/700`) and semantic status colors (`--success`/`--warning`/
-`--negative`) on top, used for the 0–9 exam score badge). Both light and dark
-variants are defined; the app doesn't currently expose a theme toggle, but the tokens
-are ready for one.
+`--negative`) on top, used for the 0–9 exam score badge). Only a light theme is
+defined — there's no theme toggle or dark-mode variant.
+
+Tailwind's PostCSS plugin is wired explicitly via `.postcssrc.json` (Angular's
+build-time auto-detection only looks for a `tailwind.config.*` file, which Tailwind
+4's CSS-first config doesn't use).
 
 ## Multi-language Support
 
@@ -135,8 +148,8 @@ localized.
 - **ESLint** (`angular-eslint` + `typescript-eslint`, flat config) — lints both `.ts`
   files and Angular templates (inline templates included via
   `angular.processInlineTemplates`). Vendored code (`shared/api/generated`, the
-  spartan-ng component sources under `shared/ui/*/src`) is excluded — it isn't
-  hand-authored here.
+  spartan-ng component sources under `shared/ui/primitives/*/src`) is excluded — it
+  isn't hand-authored here.
 - **Husky pre-commit** — runs `lint-staged`, which lints/fixes and formats only the
   files being committed.
 - **Husky commit-msg** — validates the commit message against Conventional Commits
@@ -166,6 +179,19 @@ pnpm commit
 ## Responsive Design
 
 The app shell (sidebar, header, tables, forms) adapts to mobile/tablet/desktop
-widths: the sidebar collapses to an icon rail on desktop and to an off-canvas sheet
-on narrow screens (spartan-ng's sidebar primitive), and layouts use Tailwind's `sm:`/
-`md:` breakpoints throughout.
+widths: `core/layout/sidebar-nav.ts` collapses to an icon rail on desktop and to a
+full-width off-canvas drawer on narrow screens (hand-rolled, not spartan-ng's `sidebar`
+primitive — that primitive was never adopted and has been removed), and layouts use
+Tailwind's `sm:`/`md:` breakpoints throughout.
+
+## Deployment
+
+Deploys to [Render](https://render.com) as a static site. `render.yaml` in the repo
+root defines the build (`pnpm build`) and publish directory
+(`dist/student-exam-fe/browser`), plus a catch-all rewrite to `index.html` so the
+Angular router's client-side routes work on a hard refresh or direct link. No
+environment variables are needed at deploy time — `apiBaseUrl` is baked in at build
+time via `src/environments/environment.ts`.
+
+To deploy: in the Render dashboard, **New > Blueprint**, point it at this repo — it
+picks up `render.yaml` automatically. Every push to `main` redeploys.
