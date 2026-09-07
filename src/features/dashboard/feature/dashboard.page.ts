@@ -16,7 +16,7 @@ import {
 import { ReportService as ReportApi } from '../../../shared/api/generated/report/report.service';
 import { smoothLoading } from '../../../shared/lib/smooth-loading';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
-import { ScoreBadge } from '../../../shared/ui/score-badge';
+import { ScoreBadge } from '../../../shared/ui/custom/score-badge';
 
 @Component({
   selector: 'app-dashboard-page',

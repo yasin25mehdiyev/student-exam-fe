@@ -7,9 +7,9 @@ import {
   HlmDropdownMenuItem,
   HlmDropdownMenuTrigger,
 } from '@spartan-ng/helm/dropdown-menu';
-import { FlagAz, FlagGb, FlagRu } from '../../shared/icons/flags';
-import { SupportedLocale } from '../../shared/i18n/config';
-import { LocaleService } from '../../shared/i18n/locale.service';
+import { FlagAz, FlagGb, FlagRu } from '../../icons/flags';
+import { SupportedLocale } from '../../i18n/config';
+import { LocaleService } from '../../i18n/locale.service';
 
 interface LocaleOption {
   readonly code: SupportedLocale;

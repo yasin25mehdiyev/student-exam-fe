@@ -29,8 +29,8 @@ import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 import { Logo } from '../../shared/icons/logo';
 import { LocaleService } from '../../shared/i18n/locale.service';
 import { formatToday } from './header';
-import { LanguageSwitcher } from './language-switcher';
-import { PROFILE } from './profile-menu';
+import { LanguageSwitcher } from '../../shared/ui/custom/language-switcher';
+import { PROFILE } from '../../shared/ui/custom/profile-menu';
 
 interface NavItem {
   readonly labelKey: string;

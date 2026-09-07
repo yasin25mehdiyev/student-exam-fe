@@ -27,7 +27,7 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { SortDir } from '../../../shared/lib/sort-direction';
 import { smoothLoading } from '../../../shared/lib/smooth-loading';
 import { DataTablePagination } from '../../../shared/ui/custom/data-table-pagination';
-import { ScoreBadge } from '../../../shared/ui/score-badge';
+import { ScoreBadge } from '../../../shared/ui/custom/score-badge';
 import { Exam } from '../data-access/exam.model';
 
 @Component({

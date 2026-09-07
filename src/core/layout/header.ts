@@ -5,8 +5,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { SupportedLocale } from '../../shared/i18n/config';
 import { LocaleService } from '../../shared/i18n/locale.service';
 import { Logo } from '../../shared/icons/logo';
-import { LanguageSwitcher } from './language-switcher';
-import { ProfileMenu } from './profile-menu';
+import { LanguageSwitcher } from '../../shared/ui/custom/language-switcher';
+import { ProfileMenu } from '../../shared/ui/custom/profile-menu';
 
 // Chromium/Node's bundled ICU data doesn't reliably ship month names for the 'az' locale
 // (falls back to a "2026 M09 5"-style skeleton), so today's date is formatted manually

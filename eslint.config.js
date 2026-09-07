@@ -10,7 +10,7 @@ module.exports = defineConfig([
     // Vendored code we don't hand-author: Orval's generated API client, and the
     // spartan-ng component sources copied in by `ng g @spartan-ng/cli:ui` (these use
     // the library's own "hlm"/"brn" selector prefixes, not this app's "app" prefix).
-    ignores: ['dist/**', 'src/shared/api/generated/**', 'src/shared/ui/*/src/**'],
+    ignores: ['dist/**', 'src/shared/api/generated/**', 'src/shared/ui/primitives/*/src/**'],
   },
   {
     files: ['**/*.ts'],

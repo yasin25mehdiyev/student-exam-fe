@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { ConfirmDialog } from '../../../shared/ui/confirm-dialog';
+import { ConfirmDialog } from '../../../shared/ui/custom/confirm-dialog';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { Student } from '../data-access/student.model';
 import { StudentDataAccess } from '../data-access/student.service';

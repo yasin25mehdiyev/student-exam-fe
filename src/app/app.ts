@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PageTitleService } from '../core/layout/page-title.service';
-import { RouteProgressBar } from '../core/layout/route-progress-bar';
+import { RouteProgressBar } from '../shared/ui/custom/route-progress-bar';
 import { LocaleService } from '../shared/i18n/locale.service';
 
 @Component({

@@ -24,7 +24,7 @@ import {
   HlmTr,
 } from '@spartan-ng/helm/table';
 import { HlmTabs, HlmTabsContent, HlmTabsList, HlmTabsTrigger } from '@spartan-ng/helm/tabs';
-import { ScoreBadge } from '../../../shared/ui/score-badge';
+import { ScoreBadge } from '../../../shared/ui/custom/score-badge';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { ReportDataAccess } from '../data-access/report.service';
 
