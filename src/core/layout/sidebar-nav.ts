@@ -28,6 +28,7 @@ import { HlmAvatar, HlmAvatarFallback, HlmAvatarImage } from '@spartan-ng/helm/a
 import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 import { Logo } from '../../shared/icons/logo';
 import { LocaleService } from '../../shared/i18n/locale.service';
+import { ROUTE_PATHS } from '../../shared/lib/route-paths';
 import { formatToday } from './header';
 import { LanguageSwitcher } from '../../shared/ui/custom/language-switcher';
 import { PROFILE } from '../../shared/ui/custom/profile-menu';
@@ -39,17 +40,13 @@ interface NavItem {
 }
 
 const NAV_ITEMS: readonly NavItem[] = [
-  { labelKey: 'nav.dashboard', path: '/', icon: 'lucideLayoutDashboard' },
-  { labelKey: 'nav.courses', path: '/courses', icon: 'lucideNotebookText' },
-  { labelKey: 'nav.students', path: '/students', icon: 'lucideGraduationCap' },
-  { labelKey: 'nav.exams', path: '/exams', icon: 'lucideClipboardList' },
-  { labelKey: 'nav.reports', path: '/reports', icon: 'lucideChartBar' },
+  { labelKey: 'nav.dashboard', path: ROUTE_PATHS.dashboard, icon: 'lucideLayoutDashboard' },
+  { labelKey: 'nav.courses', path: ROUTE_PATHS.courses, icon: 'lucideNotebookText' },
+  { labelKey: 'nav.students', path: ROUTE_PATHS.students, icon: 'lucideGraduationCap' },
+  { labelKey: 'nav.exams', path: ROUTE_PATHS.exams, icon: 'lucideClipboardList' },
+  { labelKey: 'nav.reports', path: ROUTE_PATHS.reports, icon: 'lucideChartBar' },
 ];
 
-// Below `md` (768px) the sidebar isn't a rail next to the content anymore - it's a full-width
-// off-canvas drawer (`fixed` + `-translate-x-full`/`translate-x-0`), toggled by the header's
-// hamburger button. At `md` and up it becomes the sticky rounded card, where the manual
-// collapse toggle applies.
 const SIDEBAR_BASE_CLASSES =
   'fixed inset-y-0 left-0 z-50 flex h-full w-full shrink-0 flex-col bg-white transition-transform duration-300 md:sticky md:inset-auto md:top-0 md:h-auto md:translate-x-0 md:gap-4 md:rounded-3xl md:shadow-[0px_10px_12.5px_0px_rgba(0,61,143,0.1)]';
 
@@ -211,9 +208,6 @@ export class SidebarNav {
 
   protected readonly collapsed = signal(false);
 
-  // Below `md` the sidebar is the full-width mobile drawer, not the collapsible desktop rail -
-  // the manual collapse toggle (hidden below `md`) only ever applies at `md` and up, so a
-  // collapsed state set on desktop doesn't also hide nav labels if the viewport later narrows.
   private readonly isDesktopViewport = signal(
     typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)').matches : true,
   );

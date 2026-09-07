@@ -5,11 +5,8 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight, lucideLayoutDashboard } from '@ng-icons/lucide';
 import { TranslatePipe } from '@ngx-translate/core';
 import { filter, startWith } from 'rxjs';
-
-interface Crumb {
-  readonly labelKey: string;
-  readonly url: string;
-}
+import { ROUTE_PATHS } from '../../shared/lib/route-paths';
+import { collectBreadcrumbTrail } from '../../shared/lib/route-breadcrumb';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -18,7 +15,7 @@ interface Crumb {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="flex shrink-0 items-center gap-1.5">
-      <a routerLink="/">
+      <a [routerLink]="routePaths.dashboard">
         <div class="flex size-5 items-center justify-center rounded bg-wash">
           <ng-icon name="lucideLayoutDashboard" size="12" class="text-brand-500" />
         </div>
@@ -45,11 +42,13 @@ export class Breadcrumb {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
 
+  protected readonly routePaths = ROUTE_PATHS;
+
   private readonly navigationTrigger = signal(0);
 
   protected readonly crumbs = computed(() => {
     this.navigationTrigger();
-    return this.buildCrumbs();
+    return collectBreadcrumbTrail(this.route);
   });
 
   constructor() {
@@ -60,33 +59,5 @@ export class Breadcrumb {
         takeUntilDestroyed(),
       )
       .subscribe(() => this.navigationTrigger.update((value) => value + 1));
-  }
-
-  private buildCrumbs(): Crumb[] {
-    const crumbs: Crumb[] = [];
-    let node: ActivatedRoute | null = this.route.root;
-    let url = '';
-
-    while (node) {
-      const child: ActivatedRoute | null = node.firstChild;
-      if (child) {
-        const segments = child.snapshot.url.map((segment: { path: string }) => segment.path);
-        if (segments.length > 0) {
-          url += `/${segments.join('/')}`;
-        }
-        const breadcrumbKey = child.snapshot.data['breadcrumb'] as string | undefined;
-        if (breadcrumbKey) {
-          crumbs.push({ labelKey: breadcrumbKey, url: url || '/' });
-        }
-      }
-      node = child;
-    }
-
-    // An empty-path index route (e.g. `courses` -> `''`) inherits its parent's route
-    // `data` by default (Angular's emptyOnly param/data inheritance), so it re-asserts
-    // the same breadcrumb the parent already contributed. Collapse those consecutive
-    // duplicates rather than special-casing empty-path segments above, which would
-    // also wrongly swallow genuine top-level `''` routes like the dashboard.
-    return crumbs.filter((crumb, index) => crumb.url !== crumbs[index - 1]?.url);
   }
 }

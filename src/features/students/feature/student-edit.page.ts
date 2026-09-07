@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { StudentDataAccess } from '../data-access/student.service';
 import { StudentForm, StudentFormValue } from '../ui/student-form';
@@ -40,11 +41,9 @@ export class StudentEditPage {
   protected readonly saving = signal(false);
 
   constructor() {
-    // A bad/deleted number makes the lookup 404 - route to the not-found page instead of leaving
-    // this page rendering just the header with an empty body underneath.
     effect(() => {
       if (this.studentResource.error()) {
-        this.router.navigateByUrl('/not-found');
+        this.router.navigateByUrl(ROUTE_PATHS.notFound);
       }
     });
   }
@@ -52,7 +51,7 @@ export class StudentEditPage {
   protected onSave(value: StudentFormValue): void {
     this.saving.set(true);
     this.data.updateStudent(this.numberValue(), value).subscribe({
-      next: () => this.router.navigate(['/students']),
+      next: () => this.router.navigate([ROUTE_PATHS.students]),
       error: () => this.saving.set(false),
     });
   }

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { StudentDataAccess } from '../data-access/student.service';
 import { StudentForm, StudentFormValue } from '../ui/student-form';
@@ -23,7 +24,7 @@ export class StudentCreatePage {
   protected onSave(value: StudentFormValue): void {
     this.saving.set(true);
     this.data.createStudent(value).subscribe({
-      next: () => this.router.navigate(['/students']),
+      next: () => this.router.navigate([ROUTE_PATHS.students]),
       error: () => this.saving.set(false),
     });
   }

@@ -18,10 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withComponentInputBinding(),
-      // Angular's Router has no per-route `errorComponent` like TanStack Router - this is the
-      // closest equivalent: any navigation failure (a resolver throwing, a lazy chunk failing to
-      // load, ...) redirects to a dedicated error page instead of leaving the app on a half-torn
-      // navigation.
       withNavigationErrorHandler((error) => {
         console.error(error);
         return new RedirectCommand(inject(Router).parseUrl('/error'));

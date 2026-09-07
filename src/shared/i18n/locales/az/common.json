@@ -36,8 +36,7 @@
     "notFound": {
       "title": "Səhifə tapılmadı",
       "description": "Axtardığınız səhifə köçürülüb, adı dəyişdirilib və ya heç vaxt mövcud olmayıb.",
-      "home": "Ana səhifəyə qayıt",
-      "browse": "Şagirdlərə keç"
+      "home": "Ana səhifəyə qayıt"
     },
     "error": {
       "title": "Nəsə səhv getdi",

@@ -29,10 +29,6 @@ export class ExamDataAccess {
     { sortBy: 'examDate', sortDirection: 'desc' },
   );
 
-  // Lightweight, one-shot lookups for the course/student pickers in the exam *create* form -
-  // gated behind `activateFormOptions()` (called only by ExamCreatePage) so injecting
-  // ExamDataAccess elsewhere (the list page, the edit page, which shows read-only text instead
-  // of these pickers) doesn't fire them for no reason.
   private readonly formOptionsActive = signal(false);
 
   readonly courseOptions = rxResource({

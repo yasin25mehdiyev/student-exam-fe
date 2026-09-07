@@ -36,8 +36,7 @@
     "notFound": {
       "title": "Page not found",
       "description": "The page you're looking for may have been moved, renamed, or never existed.",
-      "home": "Go to home",
-      "browse": "Go to students"
+      "home": "Go to home"
     },
     "error": {
       "title": "Something went wrong",

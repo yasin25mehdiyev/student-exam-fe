@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -7,14 +8,7 @@ import {
   Router,
 } from '@angular/router';
 
-// Shows on every navigation, not just slow ones - even an instant, already-cached route change
-// gets a brief flash so the bar reads as reliable feedback rather than something that only
-// sometimes appears. `MIN_VISIBLE_MS` is the floor: the bar always stays up at least this long
-// once a navigation starts, however fast the route/chunk actually resolves.
 const MIN_VISIBLE_MS = 400;
-
-/** Top-of-viewport loading bar shown while a route (and its lazy-loaded chunk) is navigating -
- *  the Angular Router equivalent of a route-level Suspense fallback. */
 @Component({
   selector: 'app-route-progress-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,7 +29,7 @@ export class RouteProgressBar {
   private shownAt: number | null = null;
 
   constructor() {
-    const subscription = this.router.events.subscribe((event) => {
+    this.router.events.pipe(takeUntilDestroyed()).subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.onNavigationStart();
       } else if (
@@ -47,10 +41,7 @@ export class RouteProgressBar {
       }
     });
 
-    inject(DestroyRef).onDestroy(() => {
-      subscription.unsubscribe();
-      clearTimeout(this.hideTimeoutId);
-    });
+    inject(DestroyRef).onDestroy(() => clearTimeout(this.hideTimeoutId));
   }
 
   private onNavigationStart(): void {

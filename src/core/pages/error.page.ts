@@ -4,13 +4,8 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTriangleAlert } from '@ng-icons/lucide';
 import { TranslatePipe } from '@ngx-translate/core';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { ROUTE_PATHS } from '../../shared/lib/route-paths';
 
-/**
- * Shown when a route navigation fails (a resolver throws, a lazy chunk fails to load, etc.) -
- * wired via `withNavigationErrorHandler` in app.config.ts, since Angular's Router has no
- * per-route `errorComponent` the way TanStack Router does (the pattern the client app's
- * ErrorBoundaryPage relies on).
- */
 @Component({
   selector: 'app-error-page',
   imports: [RouterLink, TranslatePipe, HlmButton, NgIcon],
@@ -26,9 +21,13 @@ import { HlmButton } from '@spartan-ng/helm/button';
         {{ 'common.error.description' | translate }}
       </p>
       <div class="mt-4">
-        <a hlmBtn variant="outline" routerLink="/">{{ 'common.error.home' | translate }}</a>
+        <a hlmBtn variant="outline" [routerLink]="routePaths.dashboard">{{
+          'common.error.home' | translate
+        }}</a>
       </div>
     </div>
   `,
 })
-export class ErrorPage {}
+export class ErrorPage {
+  protected readonly routePaths = ROUTE_PATHS;
+}

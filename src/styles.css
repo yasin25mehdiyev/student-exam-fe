@@ -6,10 +6,6 @@
 @import '@spartan-ng/brain/hlm-tailwind-preset.css';
 @import '@fontsource-variable/inter';
 
-/* Domain-specific tokens beyond spartan's base shadcn-style set: brand scale, semantic
-   status colors (used for exam score bands and delete/error states) and the app-shell
-   wash background. Mapped into Tailwind's color-* namespace the same way spartan maps
-   its own tokens above. */
 @theme inline {
   --color-brand-100: var(--brand-100);
   --color-brand-400: var(--brand-400);

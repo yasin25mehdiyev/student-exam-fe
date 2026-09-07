@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
 import { ConfirmDialog } from '../../../shared/ui/custom/confirm-dialog';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { Student } from '../data-access/student.model';
@@ -28,7 +29,7 @@ import { StudentTable } from '../ui/student-table';
       (searchChange)="data.list.setSearch($event)"
       (sortChange)="data.list.setSort($event.sortBy, $event.sortDirection)"
       (page)="data.list.setPage($event)"
-      (create)="router.navigate(['/students/new'])"
+      (create)="router.navigate([routePaths.students, 'new'])"
       (edit)="onEdit($event)"
       (delete)="pendingDelete.set($event)"
     />
@@ -45,6 +46,7 @@ import { StudentTable } from '../ui/student-table';
 export class StudentListPage {
   protected readonly data = inject(StudentDataAccess);
   protected readonly router = inject(Router);
+  protected readonly routePaths = ROUTE_PATHS;
   private readonly translate = inject(TranslateService);
 
   protected readonly pendingDelete = signal<Student | null>(null);
@@ -63,7 +65,7 @@ export class StudentListPage {
   });
 
   protected onEdit(student: Student): void {
-    this.router.navigate(['/students', student.number, 'edit']);
+    this.router.navigate([ROUTE_PATHS.students, student.number, 'edit']);
   }
 
   protected onDeleteDialogOpenChange(open: boolean): void {

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { CourseDataAccess } from '../data-access/course.service';
 import { CourseForm, CourseFormValue } from '../ui/course-form';
@@ -23,7 +24,7 @@ export class CourseCreatePage {
   protected onSave(value: CourseFormValue): void {
     this.saving.set(true);
     this.data.createCourse(value).subscribe({
-      next: () => this.router.navigate(['/courses']),
+      next: () => this.router.navigate([ROUTE_PATHS.courses]),
       error: () => this.saving.set(false),
     });
   }

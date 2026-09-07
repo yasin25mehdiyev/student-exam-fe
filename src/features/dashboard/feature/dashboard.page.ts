@@ -131,10 +131,6 @@ import { ScoreBadge } from '../../../shared/ui/custom/score-badge';
   `,
 })
 export class DashboardPage {
-  // Deliberately hitting ReportApi directly rather than injecting CourseDataAccess/
-  // StudentDataAccess/ExamDataAccess: those singletons eagerly fetch their *own* full lists and
-  // options (e.g. ExamDataAccess's course/student picker options, meant for the exam form) the
-  // moment they're injected anywhere. `reports/summary` returns all three counts in one request.
   private readonly reportApi = inject(ReportApi);
 
   protected readonly summary = rxResource({

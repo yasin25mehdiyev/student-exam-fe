@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { ExamDataAccess } from '../data-access/exam.service';
 import { ExamForm, ExamFormValue } from '../ui/exam-form';
@@ -35,7 +36,7 @@ export class ExamCreatePage {
   protected onSave(value: ExamFormValue): void {
     this.saving.set(true);
     this.data.createExam(value).subscribe({
-      next: () => this.router.navigate(['/exams']),
+      next: () => this.router.navigate([ROUTE_PATHS.exams]),
       error: () => this.saving.set(false),
     });
   }

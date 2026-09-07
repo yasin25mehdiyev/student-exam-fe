@@ -8,9 +8,6 @@ import { Logo } from '../../shared/icons/logo';
 import { LanguageSwitcher } from '../../shared/ui/custom/language-switcher';
 import { ProfileMenu } from '../../shared/ui/custom/profile-menu';
 
-// Chromium/Node's bundled ICU data doesn't reliably ship month names for the 'az' locale
-// (falls back to a "2026 M09 5"-style skeleton), so today's date is formatted manually
-// rather than trusting `Intl.DateTimeFormat` for every supported locale.
 const MONTH_NAMES: Record<SupportedLocale, readonly string[]> = {
   az: [
     'yanvar',

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
 import { ConfirmDialog } from '../../../shared/ui/custom/confirm-dialog';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { Exam } from '../data-access/exam.model';
@@ -28,7 +29,7 @@ import { ExamTable } from '../ui/exam-table';
       (searchChange)="data.list.setSearch($event)"
       (sortChange)="data.list.setSort($event.sortBy, $event.sortDirection)"
       (page)="data.list.setPage($event)"
-      (create)="router.navigate(['/exams/new'])"
+      (create)="router.navigate([routePaths.exams, 'new'])"
       (edit)="onEdit($event)"
       (delete)="pendingDelete.set($event)"
     />
@@ -45,6 +46,7 @@ import { ExamTable } from '../ui/exam-table';
 export class ExamListPage {
   protected readonly data = inject(ExamDataAccess);
   protected readonly router = inject(Router);
+  protected readonly routePaths = ROUTE_PATHS;
   private readonly translate = inject(TranslateService);
 
   protected readonly pendingDelete = signal<Exam | null>(null);
@@ -52,8 +54,6 @@ export class ExamListPage {
   constructor() {
     this.data.list.activate();
   }
-  // Deliberately not calling activateFormOptions() here - this page never renders the
-  // course/student pickers, only ExamCreatePage does.
 
   protected readonly deleteMessage = computed(() => {
     const exam = this.pendingDelete();
@@ -66,7 +66,7 @@ export class ExamListPage {
   });
 
   protected onEdit(exam: Exam): void {
-    this.router.navigate(['/exams', exam.id, 'edit']);
+    this.router.navigate([ROUTE_PATHS.exams, exam.id, 'edit']);
   }
 
   protected onDeleteDialogOpenChange(open: boolean): void {

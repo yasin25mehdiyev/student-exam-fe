@@ -4,10 +4,6 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideUser } from '@ng-icons/lucide';
 import { HlmDropdownMenu, HlmDropdownMenuTrigger } from '@spartan-ng/helm/dropdown-menu';
 
-// Static placeholder profile - the app has no auth/current-user concept yet, so this
-// stands in for the signed-in user shown in the header (mirrors the client app's header,
-// minus the logout action which has nothing to log out of here). Exported so the mobile
-// sidebar drawer's profile row (matching client's mobile sidebar header) can reuse it.
 export const PROFILE = {
   name: 'Yasin Mehdiyev',
   email: 'yasin.mehdiyev@numune.az',

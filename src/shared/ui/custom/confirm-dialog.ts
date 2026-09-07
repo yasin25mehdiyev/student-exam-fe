@@ -2,11 +2,6 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 import { TranslatePipe } from '@ngx-translate/core';
 import { HlmAlertDialogImports } from '@spartan-ng/helm/alert-dialog';
 
-/**
- * A single reusable delete-confirmation dialog. Courses, students and exams all need
- * the identical "are you sure?" flow, so the list pages share one instance rather
- * than mounting a `hlm-alert-dialog` per row.
- */
 @Component({
   selector: 'app-confirm-dialog',
   imports: [TranslatePipe, ...HlmAlertDialogImports],

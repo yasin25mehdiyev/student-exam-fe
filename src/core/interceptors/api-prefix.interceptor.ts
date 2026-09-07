@@ -1,13 +1,10 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-/**
- * Generated Orval services call relative paths (e.g. `/api/courses`) since the
- * OpenAPI spec has no server URL baked in. Prefix those with the configured API
- * origin so the app can point at a different backend per environment.
- */
+const API_PREFIX = '/api';
+
 export const apiPrefixInterceptor: HttpInterceptorFn = (req, next) => {
-  if (!req.url.startsWith('/api')) {
+  if (!req.url.startsWith(API_PREFIX)) {
     return next(req);
   }
 
