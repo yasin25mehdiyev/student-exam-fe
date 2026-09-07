@@ -60,7 +60,7 @@ never injects a `data-access` service directly — it only receives data through
 
 ## Prerequisites
 
-- **Node.js 20+**
+- **Node.js** `^22.22.3 || ^24.15.0 || >=26.0.0` (Angular CLI 22's requirement — see `.node-version`/`package.json`'s `engines`)
 - **pnpm** (this repo uses `pnpm-lock.yaml`)
 - A reachable backend. `src/environments/environment.development.ts` points at the
   deployed API (`https://student-exam-api.azurewebsites.net`) by default, so `pnpm dev`
