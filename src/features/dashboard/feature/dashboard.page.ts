@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideClipboardList, lucideGraduationCap, lucideNotebookText } from '@ng-icons/lucide';
@@ -137,11 +137,8 @@ export class DashboardPage {
     stream: () => this.reportApi.getSummary('application/json'),
   });
 
-  protected readonly courseFilter = signal('');
   protected readonly classAverages = rxResource({
-    params: () => this.courseFilter(),
-    stream: ({ params }) =>
-      this.reportApi.getClassAverages('application/json', { courseCode: params || undefined }),
+    stream: () => this.reportApi.getClassAverages('application/json', {}),
   });
 
   protected readonly skeletonRows = Array.from({ length: 3 }, (_, i) => i);
