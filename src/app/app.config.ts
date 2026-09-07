@@ -31,8 +31,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withInterceptors([apiPrefixInterceptor, apiErrorInterceptor])),
     provideAppTranslate(),
-    provideAppInitializer(() => {
-      inject(LocaleService);
-    }),
+    provideAppInitializer(() => inject(LocaleService).ready),
   ],
 };

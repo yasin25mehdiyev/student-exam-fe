@@ -1,5 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES, SupportedLocale } from './config';
 
 const STORAGE_KEY = 'student-exam-fe.locale';
@@ -10,9 +11,10 @@ export class LocaleService {
 
   readonly current = signal<SupportedLocale>(this.readStored() ?? DEFAULT_LOCALE);
 
-  constructor() {
-    this.translate.use(this.current());
-  }
+  /** Resolves once the initial locale's core translations have loaded - the app initializer
+   *  awaits this so routing (and any `i18nNamespaceResolver`) doesn't start until
+   *  `translate.instant()` calls actually have something to return. */
+  readonly ready: Observable<unknown> = this.translate.use(this.current());
 
   setLocale(locale: SupportedLocale): void {
     this.current.set(locale);
