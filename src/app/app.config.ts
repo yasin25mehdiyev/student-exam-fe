@@ -31,9 +31,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withInterceptors([apiPrefixInterceptor, apiErrorInterceptor])),
     provideAppTranslate(),
-    // Applies the persisted/default locale before the router's initial navigation - including
-    // to the standalone not-found page, which sits outside Shell and would otherwise never
-    // trigger LocaleService's constructor.
     provideAppInitializer(() => {
       inject(LocaleService);
     }),

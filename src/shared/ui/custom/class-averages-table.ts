@@ -13,11 +13,6 @@ import {
 import { ClassAverageDto } from '../../api/generated/models';
 import { ScoreBadge } from './score-badge';
 
-/**
- * classLevel/average/examCount summary table shared by DashboardPage and the "class"
- * tab of ReportsPage - identical row markup in both, differing only in translation
- * keys (kept as inputs rather than unifying the keys, so no locale JSON changes needed).
- */
 @Component({
   selector: 'app-class-averages-table',
   imports: [

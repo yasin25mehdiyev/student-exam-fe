@@ -1,14 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-/**
- * The backend returns errors in two different shapes depending on where they
- * originate (see StudentExam.Api.Controllers.ApiControllerBase.MapError):
- * - business-rule failures (not found, conflict, validation inside a service) are a
- *   raw JSON string, e.g. `"Course not found"`.
- * - automatic model-binding validation failures (DataAnnotations on Create/Update
- *   DTOs) are ASP.NET Core's default ValidationProblemDetails, e.g.
- *   `{ errors: { Code: ["..."] }, title, status }`.
- */
 interface ValidationProblemDetails {
   readonly title?: string;
   readonly detail?: string;
@@ -16,9 +7,7 @@ interface ValidationProblemDetails {
 }
 
 export interface ApiErrorMessages {
-  /** Shown for a non-HTTP error, or when nothing more specific could be extracted. */
   readonly fallback: string;
-  /** Shown for a network-level failure (status 0) - the request never reached the server. */
   readonly connectivity: string;
 }
 

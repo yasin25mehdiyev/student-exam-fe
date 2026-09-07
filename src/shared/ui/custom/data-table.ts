@@ -38,17 +38,9 @@ import { DataTablePagination } from './data-table-pagination';
 
 export interface DataTableColumn {
   readonly labelKey: string;
-  /** Omit for a non-sortable column. */
   readonly sortKey?: string;
 }
 
-/**
- * Generic search + sortable-columns + paginated table shell shared by every feature's list
- * page (courses, students, exams) - they all wanted the identical search/create header,
- * skeleton/empty/rows states, edit+delete action column and pagination footer, differing
- * only in their columns and per-row cell content. The row cells are content-projected via
- * `<ng-template #rowCells let-item>` so each feature keeps full control of its own columns.
- */
 @Component({
   selector: 'app-data-table',
   imports: [

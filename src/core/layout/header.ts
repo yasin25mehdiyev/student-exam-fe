@@ -53,8 +53,6 @@ const MONTH_NAMES: Record<SupportedLocale, readonly string[]> = {
   ],
 };
 
-// Exported so the mobile sidebar drawer's profile row (matching client's mobile sidebar header,
-// which shows the date next to the user's name/email) can reuse the same formatting.
 export function formatToday(locale: SupportedLocale): string {
   const today = new Date();
   return `${today.getDate()} ${MONTH_NAMES[locale][today.getMonth()]} ${today.getFullYear()}`;
