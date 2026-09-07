@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { HlmToaster } from '@spartan-ng/helm/sonner';
@@ -33,10 +34,11 @@ export class Shell {
   protected readonly mobileNavOpen = signal(false);
 
   constructor() {
-    const router = inject(Router);
-    const subscription = router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+    inject(Router)
+      .events.pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
       .subscribe(() => this.mobileNavOpen.set(false));
-    inject(DestroyRef).onDestroy(() => subscription.unsubscribe());
   }
 }

@@ -79,7 +79,6 @@ builds via `angular.json`'s `fileReplacements`).
 | --- | --- |
 | `pnpm dev` | Starts the dev server |
 | `pnpm build` | Type-checks and produces a production build |
-| `pnpm test` | Runs unit tests (Vitest) |
 | `pnpm lint` | Lints the whole project |
 | `pnpm lint:fix` | Auto-fixes lint errors |
 | `pnpm format` | Formats the project with Prettier |

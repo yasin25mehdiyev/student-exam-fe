@@ -5,12 +5,9 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { SupportedLocale } from '../../shared/i18n/config';
 import { LocaleService } from '../../shared/i18n/locale.service';
 import { Logo } from '../../shared/icons/logo';
-import { LanguageSwitcher } from './language-switcher';
-import { ProfileMenu } from './profile-menu';
+import { LanguageSwitcher } from '../../shared/ui/custom/language-switcher';
+import { ProfileMenu } from '../../shared/ui/custom/profile-menu';
 
-// Chromium/Node's bundled ICU data doesn't reliably ship month names for the 'az' locale
-// (falls back to a "2026 M09 5"-style skeleton), so today's date is formatted manually
-// rather than trusting `Intl.DateTimeFormat` for every supported locale.
 const MONTH_NAMES: Record<SupportedLocale, readonly string[]> = {
   az: [
     'yanvar',
@@ -56,8 +53,6 @@ const MONTH_NAMES: Record<SupportedLocale, readonly string[]> = {
   ],
 };
 
-// Exported so the mobile sidebar drawer's profile row (matching client's mobile sidebar header,
-// which shows the date next to the user's name/email) can reuse the same formatting.
 export function formatToday(locale: SupportedLocale): string {
   const today = new Date();
   return `${today.getDate()} ${MONTH_NAMES[locale][today.getMonth()]} ${today.getFullYear()}`;

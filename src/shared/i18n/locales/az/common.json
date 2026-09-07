@@ -31,13 +31,14 @@
     "toast": {
       "created": "Uğurla yaradıldı",
       "updated": "Uğurla yeniləndi",
-      "deleted": "Uğurla silindi"
+      "deleted": "Uğurla silindi",
+      "unexpectedError": "Gözlənilməz xəta baş verdi.",
+      "connectivityError": "Serverə qoşulmaq mümkün olmadı. İnternet bağlantınızı yoxlayın."
     },
     "notFound": {
       "title": "Səhifə tapılmadı",
       "description": "Axtardığınız səhifə köçürülüb, adı dəyişdirilib və ya heç vaxt mövcud olmayıb.",
-      "home": "Ana səhifəyə qayıt",
-      "browse": "Şagirdlərə keç"
+      "home": "Ana səhifəyə qayıt"
     },
     "error": {
       "title": "Nəsə səhv getdi",

@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { ExamDataAccess } from '../data-access/exam.service';
 import { ExamForm, ExamFormValue } from '../ui/exam-form';
@@ -40,11 +41,9 @@ export class ExamEditPage {
   protected readonly saving = signal(false);
 
   constructor() {
-    // A bad/deleted id makes the lookup 404 - route to the not-found page instead of leaving
-    // this page rendering just the header with an empty body underneath.
     effect(() => {
       if (this.examResource.error()) {
-        this.router.navigateByUrl('/not-found');
+        this.router.navigateByUrl(ROUTE_PATHS.notFound);
       }
     });
   }
@@ -52,7 +51,7 @@ export class ExamEditPage {
   protected onSave(value: ExamFormValue): void {
     this.saving.set(true);
     this.data.updateExam(this.idValue(), value).subscribe({
-      next: () => this.router.navigate(['/exams']),
+      next: () => this.router.navigate([ROUTE_PATHS.exams]),
       error: () => this.saving.set(false),
     });
   }

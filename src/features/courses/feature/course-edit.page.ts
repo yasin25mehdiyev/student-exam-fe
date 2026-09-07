@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { CourseDataAccess } from '../data-access/course.service';
 import { CourseForm, CourseFormValue } from '../ui/course-form';
@@ -31,11 +32,9 @@ export class CourseEditPage {
   protected readonly saving = signal(false);
 
   constructor() {
-    // A bad/deleted code makes the lookup 404 - route to the not-found page instead of leaving
-    // this page rendering just the header with an empty body underneath.
     effect(() => {
       if (this.courseResource.error()) {
-        this.router.navigateByUrl('/not-found');
+        this.router.navigateByUrl(ROUTE_PATHS.notFound);
       }
     });
   }
@@ -43,7 +42,7 @@ export class CourseEditPage {
   protected onSave(value: CourseFormValue): void {
     this.saving.set(true);
     this.data.updateCourse(this.code(), value).subscribe({
-      next: () => this.router.navigate(['/courses']),
+      next: () => this.router.navigate([ROUTE_PATHS.courses]),
       error: () => this.saving.set(false),
     });
   }

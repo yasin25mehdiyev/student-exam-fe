@@ -30,11 +30,6 @@ export interface PagedList<T> {
   setSearch(search: string): void;
   setSort(sortBy: string | undefined, sortDirection?: SortDir): void;
   reload(): void;
-  /** Starts (or resumes) fetching. A no-op if already active. `CourseDataAccess` etc. are root
-   *  singletons also injected by pages that only need the create/update/delete methods (e.g. the
-   *  create form) - without this gate, merely injecting the service would fire the list request
-   *  on every page, including ones that never render the list. Only the page that actually shows
-   *  the list calls this. */
   activate(): void;
 }
 
@@ -46,13 +41,6 @@ const DEFAULT_QUERY: PagedQuery = {
   sortDirection: 'asc',
 };
 
-/**
- * Wires a signal-based page/search/sort query to an `rxResource`. Shared by every
- * feature's list (courses, students, exams) since they all hit a
- * `GET /api/<resource>?pageNumber&pageSize&search&sortBy&sortDirection` endpoint with
- * the same `PagedResult<T>` response shape - this is the one piece of the data-access
- * layer worth factoring out rather than repeating three times.
- */
 export function createPagedList<T>(
   load: (query: PagedQuery) => Observable<PagedResultLike<T>>,
   defaults?: Partial<PagedQuery>,

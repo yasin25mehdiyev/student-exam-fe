@@ -8,9 +8,6 @@ export class ReportDataAccess {
   private readonly api = inject(ReportApi);
   private readonly courseApi = inject(CourseApi);
 
-  // `courseOptions` (the class-averages filter dropdown) and `classAverages` itself only belong
-  // to the "class averages" tab - gated behind `activateClassAverages()` (called only when that
-  // tab becomes active) so visiting the "student report" tab doesn't fire them too.
   private readonly classAveragesActive = signal(false);
 
   readonly courseOptions = rxResource({
@@ -29,7 +26,6 @@ export class ReportDataAccess {
     });
   }
 
-  /** `courseCode` is `''` for "all courses" - still always resolved once the tab is active. */
   classAverages(courseCode: Signal<string>) {
     return rxResource({
       params: () => (this.classAveragesActive() ? courseCode() : undefined),

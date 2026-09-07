@@ -112,9 +112,6 @@ export const routes: Routes = [
       },
     ],
   },
-  // Outside the Shell route on purpose: an unmatched path renders a bare full-screen page with
-  // no sidebar/header, matching the client app's actual not-found behavior (an unmatched path
-  // there resolves at the router root, bypassing the dashboard layout entirely).
   {
     path: 'not-found',
     loadComponent: () => import('../core/pages/not-found.page').then((m) => m.NotFoundPage),

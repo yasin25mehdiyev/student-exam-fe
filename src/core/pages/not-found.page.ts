@@ -2,12 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { ROUTE_PATHS } from '../../shared/lib/route-paths';
 
-/**
- * Rendered as a standalone top-level route (outside the Shell) so an unmatched URL shows a bare
- * full-screen page with no sidebar/header - matching the client app's actual behavior, where an
- * unmatched path resolves at the router root rather than inside the dashboard layout.
- */
 @Component({
   selector: 'app-not-found-page',
   imports: [RouterLink, TranslatePipe, HlmButton],
@@ -21,13 +17,12 @@ import { HlmButton } from '@spartan-ng/helm/button';
       <p class="max-w-md text-sm text-muted-foreground">
         {{ 'common.notFound.description' | translate }}
       </p>
-      <div class="mt-4 flex items-center gap-3">
-        <a hlmBtn routerLink="/">{{ 'common.notFound.home' | translate }}</a>
-        <a hlmBtn variant="outline" routerLink="/students">{{
-          'common.notFound.browse' | translate
-        }}</a>
+      <div class="mt-4">
+        <a hlmBtn [routerLink]="routePaths.dashboard">{{ 'common.notFound.home' | translate }}</a>
       </div>
     </div>
   `,
 })
-export class NotFoundPage {}
+export class NotFoundPage {
+  protected readonly routePaths = ROUTE_PATHS;
+}

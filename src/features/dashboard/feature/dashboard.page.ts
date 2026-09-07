@@ -1,39 +1,17 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideClipboardList, lucideGraduationCap, lucideNotebookText } from '@ng-icons/lucide';
 import { TranslatePipe } from '@ngx-translate/core';
 import { HlmSkeleton } from '@spartan-ng/helm/skeleton';
-import {
-  HlmTBody,
-  HlmTHead,
-  HlmTable,
-  HlmTableContainer,
-  HlmTd,
-  HlmTh,
-  HlmTr,
-} from '@spartan-ng/helm/table';
 import { ReportService as ReportApi } from '../../../shared/api/generated/report/report.service';
 import { smoothLoading } from '../../../shared/lib/smooth-loading';
+import { ClassAveragesTable } from '../../../shared/ui/custom/class-averages-table';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
-import { ScoreBadge } from '../../../shared/ui/score-badge';
 
 @Component({
   selector: 'app-dashboard-page',
-  imports: [
-    TranslatePipe,
-    NgIcon,
-    HlmSkeleton,
-    HlmTableContainer,
-    HlmTable,
-    HlmTHead,
-    HlmTBody,
-    HlmTr,
-    HlmTh,
-    HlmTd,
-    ScoreBadge,
-    PageHeader,
-  ],
+  imports: [TranslatePipe, NgIcon, HlmSkeleton, ClassAveragesTable, PageHeader],
   providers: [provideIcons({ lucideNotebookText, lucideGraduationCap, lucideClipboardList })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -91,64 +69,27 @@ import { ScoreBadge } from '../../../shared/ui/score-badge';
         {{ 'dashboard.classAverages' | translate }}
       </h3>
 
-      <div hlmTableContainer class="overflow-hidden rounded-xl border border-border">
-        <table hlmTable>
-          <thead hlmTHead>
-            <tr hlmTr class="bg-brand-500 hover:bg-brand-500">
-              <th hlmTh class="text-white">{{ 'dashboard.columns.classLevel' | translate }}</th>
-              <th hlmTh class="text-white">{{ 'dashboard.columns.average' | translate }}</th>
-              <th hlmTh class="text-white">{{ 'dashboard.columns.examCount' | translate }}</th>
-            </tr>
-          </thead>
-          <tbody hlmTBody>
-            @if (classAveragesLoading()) {
-              @for (row of skeletonRows; track row) {
-                <tr hlmTr class="bg-white">
-                  <td hlmTd><div hlmSkeleton class="h-4 w-10"></div></td>
-                  <td hlmTd><div hlmSkeleton class="h-5 w-10 rounded-full"></div></td>
-                  <td hlmTd><div hlmSkeleton class="h-4 w-10"></div></td>
-                </tr>
-              }
-            } @else if (!classAverages.value()?.length) {
-              <tr hlmTr class="bg-white">
-                <td hlmTd colspan="3" class="py-8 text-center text-ink-tertiary">
-                  {{ 'dashboard.empty' | translate }}
-                </td>
-              </tr>
-            } @else {
-              @for (row of classAverages.value()!; track row.classLevel) {
-                <tr hlmTr class="bg-white">
-                  <td hlmTd>{{ row.classLevel }}</td>
-                  <td hlmTd><app-score-badge [score]="row.averageScore ?? 0" /></td>
-                  <td hlmTd>{{ row.examCount }}</td>
-                </tr>
-              }
-            }
-          </tbody>
-        </table>
-      </div>
+      <app-class-averages-table
+        [rows]="classAverages.value() ?? []"
+        [isLoading]="classAveragesLoading()"
+        classLevelLabelKey="dashboard.columns.classLevel"
+        averageLabelKey="dashboard.columns.average"
+        examCountLabelKey="dashboard.columns.examCount"
+        emptyMessageKey="dashboard.empty"
+      />
     </div>
   `,
 })
 export class DashboardPage {
-  // Deliberately hitting ReportApi directly rather than injecting CourseDataAccess/
-  // StudentDataAccess/ExamDataAccess: those singletons eagerly fetch their *own* full lists and
-  // options (e.g. ExamDataAccess's course/student picker options, meant for the exam form) the
-  // moment they're injected anywhere. `reports/summary` returns all three counts in one request.
   private readonly reportApi = inject(ReportApi);
 
   protected readonly summary = rxResource({
     stream: () => this.reportApi.getSummary('application/json'),
   });
 
-  protected readonly courseFilter = signal('');
   protected readonly classAverages = rxResource({
-    params: () => this.courseFilter(),
-    stream: ({ params }) =>
-      this.reportApi.getClassAverages('application/json', { courseCode: params || undefined }),
+    stream: () => this.reportApi.getClassAverages('application/json', {}),
   });
-
-  protected readonly skeletonRows = Array.from({ length: 3 }, (_, i) => i);
 
   protected readonly summaryLoading = smoothLoading(this.summary.isLoading);
   protected readonly classAveragesLoading = smoothLoading(this.classAverages.isLoading);

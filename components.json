@@ -1,5 +1,5 @@
 {
-  "componentsPath": "src/shared/ui",
+  "componentsPath": "src/shared/ui/primitives",
   "style": "nova",
   "importAlias": "@spartan-ng/helm"
 }

@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { ConfirmDialog } from '../../../shared/ui/confirm-dialog';
+import { ROUTE_PATHS } from '../../../shared/lib/route-paths';
+import { ConfirmDialog } from '../../../shared/ui/custom/confirm-dialog';
 import { PageHeader } from '../../../shared/ui/custom/page-header';
 import { Course } from '../data-access/course.model';
 import { CourseDataAccess } from '../data-access/course.service';
@@ -28,7 +29,7 @@ import { CourseTable } from '../ui/course-table';
       (searchChange)="data.list.setSearch($event)"
       (sortChange)="data.list.setSort($event.sortBy, $event.sortDirection)"
       (page)="data.list.setPage($event)"
-      (create)="router.navigate(['/courses/new'])"
+      (create)="router.navigate([routePaths.courses, 'new'])"
       (edit)="onEdit($event)"
       (delete)="pendingDelete.set($event)"
     />
@@ -45,6 +46,7 @@ import { CourseTable } from '../ui/course-table';
 export class CourseListPage {
   protected readonly data = inject(CourseDataAccess);
   protected readonly router = inject(Router);
+  protected readonly routePaths = ROUTE_PATHS;
   private readonly translate = inject(TranslateService);
 
   protected readonly pendingDelete = signal<Course | null>(null);
@@ -59,7 +61,7 @@ export class CourseListPage {
   });
 
   protected onEdit(course: Course): void {
-    this.router.navigate(['/courses', course.code, 'edit']);
+    this.router.navigate([ROUTE_PATHS.courses, course.code, 'edit']);
   }
 
   protected onDeleteDialogOpenChange(open: boolean): void {

@@ -1,11 +1,10 @@
 import { Injectable, Signal, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { TranslateService } from '@ngx-translate/core';
-import { toast } from '@spartan-ng/brain/sonner';
 import { Observable, tap } from 'rxjs';
 import { CourseService as CourseApi } from '../../../shared/api/generated/course/course.service';
 import { ExamService as ExamApi } from '../../../shared/api/generated/exam/exam.service';
 import { StudentService as StudentApi } from '../../../shared/api/generated/student/student.service';
+import { createMutationNotifier } from '../../../shared/lib/mutation-toast';
 import { createPagedList } from '../../../shared/lib/paged-list';
 import { toApiSortDirection } from '../../../shared/lib/sort-direction';
 import { CreateExamDto, Exam, UpdateExamDto } from './exam.model';
@@ -15,7 +14,6 @@ export class ExamDataAccess {
   private readonly api = inject(ExamApi);
   private readonly courseApi = inject(CourseApi);
   private readonly studentApi = inject(StudentApi);
-  private readonly translate = inject(TranslateService);
 
   readonly list = createPagedList<Exam>(
     (query) =>
@@ -29,10 +27,8 @@ export class ExamDataAccess {
     { sortBy: 'examDate', sortDirection: 'desc' },
   );
 
-  // Lightweight, one-shot lookups for the course/student pickers in the exam *create* form -
-  // gated behind `activateFormOptions()` (called only by ExamCreatePage) so injecting
-  // ExamDataAccess elsewhere (the list page, the edit page, which shows read-only text instead
-  // of these pickers) doesn't fire them for no reason.
+  private readonly notifyMutated = createMutationNotifier(this.list);
+
   private readonly formOptionsActive = signal(false);
 
   readonly courseOptions = rxResource({
@@ -60,19 +56,14 @@ export class ExamDataAccess {
   createExam(dto: CreateExamDto): Observable<Exam> {
     return this.api
       .createExam(dto, 'application/json')
-      .pipe(tap(() => this.onMutated('common.toast.created')));
+      .pipe(tap(() => this.notifyMutated('common.toast.created')));
   }
 
   updateExam(id: number, dto: UpdateExamDto): Observable<void> {
-    return this.api.updateExam(id, dto).pipe(tap(() => this.onMutated('common.toast.updated')));
+    return this.api.updateExam(id, dto).pipe(tap(() => this.notifyMutated('common.toast.updated')));
   }
 
   deleteExam(id: number): Observable<void> {
-    return this.api.deleteExam(id).pipe(tap(() => this.onMutated('common.toast.deleted')));
-  }
-
-  private onMutated(toastKey: string): void {
-    this.list.reload();
-    toast.success(this.translate.instant(toastKey));
+    return this.api.deleteExam(id).pipe(tap(() => this.notifyMutated('common.toast.deleted')));
   }
 }
